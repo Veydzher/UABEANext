@@ -9,6 +9,7 @@ using UABEANext4.AssetWorkspace;
 using UABEANext4.Logic.Configuration;
 using UABEANext4.Plugins;
 using UABEANext4.Util;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TexturePlugin;
 
@@ -88,7 +89,7 @@ public class ExportTextureOption : IUavPluginOption
                 }
 
                 var texFile = TextureFile.ReadTextureFile(texBaseField);
-                if (texFile.m_PlatformBlob.Length != 0)
+                if (texFile.ShouldBeSwizzled())
                 {
                     TextureHelper.SwizzleOptIn(texFile, asset.FileInstance.file);
                 }
@@ -171,7 +172,7 @@ public class ExportTextureOption : IUavPluginOption
     {
         AssetTypeValueField? texBaseField = TextureHelper.GetByteArrayTexture(workspace, asset);
         TextureFile texFile = TextureFile.ReadTextureFile(texBaseField);
-        if (texFile.m_PlatformBlob.Length != 0)
+        if (texFile.ShouldBeSwizzled())
         {
             TextureHelper.SwizzleOptIn(texFile, asset.FileInstance.file);
         }

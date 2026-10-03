@@ -79,7 +79,7 @@ public class ImportBatchTextureOption : IUavPluginOption
             }
 
             var tex = TextureFile.ReadTextureFile(baseField);
-            if (tex.m_PlatformBlob.Length != 0)
+            if (tex.ShouldBeSwizzled())
             {
                 TextureHelper.SwizzleOptIn(tex, asset.FileInstance.file);
             }

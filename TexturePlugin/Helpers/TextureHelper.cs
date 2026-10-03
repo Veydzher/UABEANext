@@ -93,5 +93,9 @@ public static class TextureHelper
         {
             texture.swizzleType = SwizzleType.Switch;
         }
+        else if (file.Metadata.TargetPlatform == (uint)BuildTarget.PS4)
+        {
+            texture.swizzleType = SwizzleType.PS4;
+        }
     }
 }

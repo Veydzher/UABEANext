@@ -8,6 +8,7 @@ using SkiaSharp;
 using System.Runtime.InteropServices;
 using UABEANext4.AssetWorkspace;
 using UABEANext4.Logic.Mesh;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TexturePlugin.Helpers;
 
@@ -120,7 +121,7 @@ public class TextureLoader
             var texture = TextureFile.ReadTextureFile(textureEditBf);
             format = (TextureFormat)texture.m_TextureFormat;
 
-            if (texture.m_PlatformBlob.Length != 0)
+            if (texture.ShouldBeSwizzled())
             {
                 TextureHelper.SwizzleOptIn(texture, textureAsset.FileInstance.file);
             }
@@ -372,7 +373,7 @@ public class TextureLoader
         var texture = TextureFile.ReadTextureFile(textureEditBf);
         format = (TextureFormat)texture.m_TextureFormat;
 
-        if (texture.m_PlatformBlob.Length != 0)
+        if (texture.ShouldBeSwizzled())
         {
             TextureHelper.SwizzleOptIn(texture, asset.FileInstance.file);
         }
